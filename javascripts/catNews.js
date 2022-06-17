@@ -16,12 +16,12 @@ const catHeadline = async (type) =>
     try 
     {
         let res = await fetch(
-            `https://newsapi.org/v2/top-headlines?country=in&category=${type}&apiKey=2cded7489353421890f0011cd5abdf1d`);
+            `https://newsdata.io/api/1/news?apikey=pub_84196d1cc6cc34ab31ded860a14a13762f53&language=en&country=in&category=${type}`);
 
         let data = await res.json();
-        console.log(data.articles);
-        catNews(data.articles)
-        return type;
+        console.log(data.results);
+        catNews(data.results)
+        // return type;
     }
 
     catch(err)
@@ -35,14 +35,17 @@ let catNews = (data) =>
     const container = document.querySelector("#category");
     container.innerHTML = null;
 
-    data.forEach(({ title, description, urlToImage, url, publishedAt }) => 
+    data.forEach(({ title, description, image_url, link, pubDate }) => 
     {
 
         let div = document.createElement('div');
         div.setAttribute('class', "image");
 
         let img = document.createElement('img');
-        img.src = urlToImage;
+        img.src = image_url;
+
+        let date = document.createElement('p');
+        date.innerText = pubDate;
 
         let p = document.createElement('p');
         p.innerText = description;
@@ -50,15 +53,12 @@ let catNews = (data) =>
         let h3 = document.createElement('h3');
         h3.innerText = title;
 
-        let date = document.createElement('p');
-        date = date.innerText = publishedAt;
+        let site = document.createElement("a");
+        site.setAttribute("target","detailNews.html");
+        site.href = link;
+        site.innerText = "Read more";
 
-        let link = document.createElement("a");
-        link.setAttribute("target","detailNews.html");
-        link.href = url;
-        link.innerText = "Read more";
-
-        div.append(img, date, h3, p, link);
+        div.append(img, date, h3, p, site);
         container.append(div);
     })
 }

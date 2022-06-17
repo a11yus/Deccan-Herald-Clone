@@ -9,16 +9,19 @@ document.getElementById("f1-main").innerHTML = footer1();
 document.getElementById("f2-main").innerHTML = footer2();
 document.getElementById("con").innerHTML = footer3();
 
+
 const searchNews = async (queries) => 
 {
     try 
     {
         let res = await fetch(
-            `https://newsapi.org/v2/top-headlines?q=${queries}&apiKey=2cded7489353421890f0011cd5abdf1d`);
+            `https://newsdata.io/api/1/news?apikey=pub_84196d1cc6cc34ab31ded860a14a13762f53&language=en&country=in&q=${queries}`);
 
         let data = await res.json();
-        console.log(data.articles);
-        showNews(data.articles)
+
+        console.log(data.results);
+        showNews(data.results);
+         
     }
 
     catch(err)
@@ -27,23 +30,27 @@ const searchNews = async (queries) =>
     }
 }
 
+
 let showNews = (data) => 
 {
     const container = document.querySelector("#detail_news");
     container.innerHTML = null;
 
-    data.forEach(({ title, description, urlToImage, url }) => 
+    data.forEach(({  title, description, image_url, link, pubDate }) => 
     {
         let div = document.createElement('div');
         div.setAttribute('class', "box");
 
-        let link = document.createElement("a");
-        link.setAttribute("target","detailNews.html");
-        link.href = url;
-        link.innerText = "Read more";
+        let date = document.createElement('p');
+        date.innerText = pubDate;
+
+        let site = document.createElement("a");
+        site.setAttribute("target","detailNews.html");
+        site.href = link;
+        site.innerText = "Read more";
 
         let img = document.createElement('img');
-        img.src = urlToImage;
+        img.src = image_url;
         img.style.width = "200px";
         img.style.height = "200px";
 
@@ -54,9 +61,7 @@ let showNews = (data) =>
         h3.innerText = title;
 
         let div1 = document.createElement('div');
-        div1.setAttribute('class', "second");
-        div1.append(h3, p, link);
-
+        div1.append(h3, p, date, site);
         div1.setAttribute('class', "inside");
 
         div.append(img, div1);

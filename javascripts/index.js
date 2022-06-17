@@ -17,11 +17,13 @@ const currentNews = async (queries) =>
     try 
     {
         let res = await fetch(
-            `https://newsapi.org/v2/top-headlines?q=${queries}&apiKey=2cded7489353421890f0011cd5abdf1d`);
+            `https://newsdata.io/api/1/news?apikey=pub_84196d1cc6cc34ab31ded860a14a13762f53&language=en&country=in&q=${queries}`);
 
         let data = await res.json();
-        
-        append(data.articles) 
+
+        console.log(data.results);
+        append(data.results);
+         
     }
 
     catch(err)
@@ -35,18 +37,21 @@ let append = (data) =>
     const container = document.querySelector("#container");
     // container.innerHTML = null;
 
-    data.forEach(({ title, description, url, urlToImage }) => 
+    data.forEach(({  title, description, image_url, link, pubDate }) => 
     {
         let div = document.createElement('div');
         div.setAttribute('class', "box");
 
-        let link = document.createElement("a");
-        link.setAttribute("target","detailNews.html");
-        link.href = url;
-        link.innerText = "Read more";
+        let date = document.createElement('p');
+        date.innerText = pubDate;
+
+        let site = document.createElement("a");
+        site.setAttribute("target","detailNews.html");
+        site.href = link;
+        site.innerText = "Read more";
 
         let img = document.createElement('img');
-        img.src = urlToImage;
+        img.src = image_url;
         img.style.width = "200px";
         img.style.height = "200px";
 
@@ -57,7 +62,7 @@ let append = (data) =>
         h3.innerText = title;
 
         let div1 = document.createElement('div');
-        div1.append(h3, p, link);
+        div1.append(h3, p, site, date);
         div1.setAttribute('class', "inside");
 
         div.append(img, div1);
@@ -65,25 +70,24 @@ let append = (data) =>
     })
 }
 currentNews("modi");
-currentNews("general");
-currentNews("entertainment");
 currentNews("sports");
-currentNews("science");
-currentNews("technology");
+currentNews("food");
 
 
 //fields news like business and all
 
 const fieldHeadline = async (field) => 
 {
+  
     try 
     {
         let res = await fetch(
-            `https://newsapi.org/v2/top-headlines?country=in&category=${field}&apiKey=2cded7489353421890f0011cd5abdf1d`);
+            `https://newsdata.io/api/1/news?apikey=pub_84196d1cc6cc34ab31ded860a14a13762f53&country=in&category=${field}`);
 
         let data = await res.json();
-        console.log(data.articles);
-        fieldNews(data.articles)
+        console.log(data.results);
+        fieldNews(data.results)
+        // return type;
     }
 
     catch(err)
@@ -92,19 +96,19 @@ const fieldHeadline = async (field) =>
     }
 }
 
-
 let fieldNews = (data) => 
 {
-    const box = document.querySelector("#results");
-    // box.innerHTML = null
-    
-    data.forEach(({ title, description, url, urlToImage }) => 
+    const container = document.querySelector("#results");
+    // container.innerHTML = null;
+
+    data.forEach(({ title, description, image_url, link, pubDate }) => 
     {
-        let frame = document.createElement('div');
-        frame.setAttribute('class', "frame")
+
+        let div = document.createElement('div');
+        div.setAttribute('class', "frame");
 
         let img = document.createElement('img');
-        img.src = urlToImage;
+        img.src = image_url;
         img.style.width = "200px";
         img.style.height = "200px";
 
@@ -114,15 +118,19 @@ let fieldNews = (data) =>
         let h3 = document.createElement('h3');
         h3.innerText = title;
 
-        let link = document.createElement("a");
-        link.setAttribute("target","detailNews.html");
-        link.href = url;
-        link.innerText = "Read more";
+        let date = document.createElement('p');
+        date.innerText = pubDate;
 
-        frame.append(img, h3, p, link);
-        box.append(frame);
+        let site = document.createElement("a");
+        site.setAttribute("target","detailNews.html");
+        site.href = link;
+        site.innerText = "Read more";
+
+        div.append(img, date, h3, p, site);
+        container.append(div);
     })
 }
+
 
 const fields = document.querySelector("#fields").children;
 
@@ -136,6 +144,7 @@ for ( let field of fields )
     })
 }
 
-fieldHeadline("general");
-fieldHeadline("business");
+fieldHeadline("sports");
+fieldHeadline("politics");
+
 

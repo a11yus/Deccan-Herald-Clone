@@ -15,16 +15,18 @@
 img 
 {
     height: 30px;
-    margin-top: 6px;
+    margin-top: 7px;
     margin-left: -11rem;
+    /* border: 1px solid red; */
 }
 
 #fields
 {
     display: flex;
     justify-content: space-between;
-    margin-right: 10rem;
-    width: 300px;
+    margin-right: 20rem;
+    width: 200px;
+    /* border: 1px solid red; */
 }
 
 #fields h3
@@ -44,7 +46,7 @@ img
 
 #query
 {
-    width: 200px;
+    width: 180px;
     margin-top: 0.5rem;
     margin-right: -11rem;
     padding: 8px;
