@@ -16,7 +16,7 @@ const catHeadline = async (type) =>
     try 
     {
         let res = await fetch(
-            `https://newsapi.org/v2/top-headlines?country=in&category=${type}&apiKey=62fdb7cc54bf49f196788c0ae4f6418d`);
+            `https://newsapi.org/v2/top-headlines?country=in&category=${type}&apiKey=2cded7489353421890f0011cd5abdf1d`);
 
         let data = await res.json();
         console.log(data.articles);

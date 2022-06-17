@@ -14,3 +14,17 @@
     display: flex;
     margin-bottom: 1rem;
 }
+
+h1
+{
+    padding-top: 2rem;
+}
+
+.image a
+{
+    text-decoration: none;
+    background-color: #0d4b5c;
+    color: white;
+    padding: 2px;
+    border-radius: 4px;
+}

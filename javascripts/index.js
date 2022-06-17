@@ -17,11 +17,11 @@ const currentNews = async (queries) =>
     try 
     {
         let res = await fetch(
-            `https://newsapi.org/v2/top-headlines?q=${queries}&apiKey=62fdb7cc54bf49f196788c0ae4f6418d`);
+            `https://newsapi.org/v2/top-headlines?q=${queries}&apiKey=2cded7489353421890f0011cd5abdf1d`);
 
         let data = await res.json();
         
-        append(data.articles)
+        append(data.articles) 
     }
 
     catch(err)
@@ -79,7 +79,7 @@ const fieldHeadline = async (field) =>
     try 
     {
         let res = await fetch(
-            `https://newsapi.org/v2/top-headlines?country=in&category=${field}&apiKey=62fdb7cc54bf49f196788c0ae4f6418d`);
+            `https://newsapi.org/v2/top-headlines?country=in&category=${field}&apiKey=2cded7489353421890f0011cd5abdf1d`);
 
         let data = await res.json();
         console.log(data.articles);
@@ -101,7 +101,7 @@ let fieldNews = (data) =>
     data.forEach(({ title, description, url, urlToImage }) => 
     {
         let frame = document.createElement('div');
-        frame.setAttribute('class', "image")
+        frame.setAttribute('class', "frame")
 
         let img = document.createElement('img');
         img.src = urlToImage;

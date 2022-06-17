@@ -14,7 +14,7 @@ const searchNews = async (queries) =>
     try 
     {
         let res = await fetch(
-            `https://newsapi.org/v2/top-headlines?q=${queries}&apiKey=62fdb7cc54bf49f196788c0ae4f6418d`);
+            `https://newsapi.org/v2/top-headlines?q=${queries}&apiKey=2cded7489353421890f0011cd5abdf1d`);
 
         let data = await res.json();
         console.log(data.articles);
@@ -54,7 +54,9 @@ let showNews = (data) =>
         h3.innerText = title;
 
         let div1 = document.createElement('div');
+        div1.setAttribute('class', "second");
         div1.append(h3, p, link);
+
         div1.setAttribute('class', "inside");
 
         div.append(img, div1);
