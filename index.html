@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
+    <link rel="stylesheet" href="./styles/footer.css">
+    <link rel="stylesheet" href="./styles/sidebar.css">
+    <script src="https://kit.fontawesome.com/23cec7326b.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <title>Deccan herald</title>
+</head>
+<body>
+    <div id="navbar"></div>
+    <h1>Recent News</h1>
+    <nav class="sidebar"></nav>
+    <div id="container"></div>
+    <h1>Nationl News</h1>
+    <div id="results"></div>
+    <div id="f1-main"></div>
+    <div id="f2-main"></div>
+    <div id="con"></div>
+</body>
+</html>
+
+<script src="./javascripts/index.js" type="module"></script>
+<script>
+
+$('.btn').click(function () 
+{
+    $(this).toggleClass("click");
+    $('.sidebar').toggleClass("show");
+})
+
+$('.feat-btn').click(function()
+{
+    $('nav ul .feat-show').toggleClass("show");
+    $('nav ul .first').toggleClass("rotate");
+});
+
+$('.serv-btn').click(function()
+{
+    $('nav ul .serv-show').toggleClass("show1");
+    $('nav ul .second').toggleClass("rotate");
+});
+
+$('nav ul li').click(function()
+{
+    $(this).addClass('active').siblings().removeClass('active');
+})
+</script>

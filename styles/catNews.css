@@ -1,0 +1,16 @@
+
+#category
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#category div img
+{
+    height: 200px;
+    width: 200px;
+    margin-left: 0rem;
+    margin-top: 2rem;
+    display: flex;
+    margin-bottom: 1rem;
+}
